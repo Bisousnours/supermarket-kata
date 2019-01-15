@@ -8,7 +8,7 @@ import junit.framework.TestSuite;
  * Unit test for simple App.
  */
 public class AppTest 
-    extends TestCase
+    @Test
 {
     /**
      * Create the test case
@@ -33,6 +33,6 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+	Assertions.assertThat(true).isTrue();
     }
 }
