@@ -1,4 +1,6 @@
 # supermarket-kata
+https://travis-ci.org/Bisousnours/supermarket-kata.svg?branch=master
+
 Conventions :
 variable_written_like_this
 fonctionWrittenLikeThis
