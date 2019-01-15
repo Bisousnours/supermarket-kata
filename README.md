@@ -1,5 +1,5 @@
 # supermarket-kata
-https://travis-ci.org/Bisousnours/supermarket-kata.svg?branch=master
+[![Build Status](https://travis-ci.org/Bisousnours/supermarket-kata.svg?branch=master)](https://travis-ci.org/Bisousnours/supermarket-kata)
 
 Conventions :
 variable_written_like_this
