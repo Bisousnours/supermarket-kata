@@ -8,8 +8,8 @@ import junit.framework.TestSuite;
  * Unit test for simple App.
  */
 public class AppTest 
-    @Test
 {
+	@Test
     /**
      * Create the test case
      *
