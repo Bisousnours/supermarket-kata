@@ -1,6 +1,7 @@
 package esiea;
 
 import org.junit.jupiter.api.Test;
+import org.assertj.core.api.Assertions.*;
 //import junit.framework.TestCase;
 //import junit.framework.TestSuite;
 
