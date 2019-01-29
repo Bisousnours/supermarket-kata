@@ -12,7 +12,7 @@ import org.assertj.core.api.Assertions.*;
 public class AppTest 
 
 {
-	@test
+	@Test
     /**
      * Create the test case
      *
