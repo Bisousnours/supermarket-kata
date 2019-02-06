@@ -1,5 +1,6 @@
 package esiea.model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SupermarketTest {
@@ -21,5 +22,7 @@ public class SupermarketTest {
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
         // Todo: complete this test
+        Double expectedResult = 1.99 * 2.5;
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
 }
