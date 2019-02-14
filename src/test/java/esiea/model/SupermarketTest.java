@@ -6,6 +6,15 @@ import org.junit.jupiter.api.Test;
 public class SupermarketTest {
 
     @Test
+    public void testProductPriceInCatalog(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+
+        double ExpectedPrice = 0.99;
+        Assertions.assertEquals(ExpectedPrice, catalog.getUnitPrice(toothbrush));
+    }
+    @Test
     public void testApplePriceWithToothbrushDiscount() {
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
@@ -34,13 +43,62 @@ public class SupermarketTest {
         cart.addItemQuantity(toothbrush, 3);
 
         Teller teller = new Teller(catalog);
-        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 3.0);
+        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 10.0);
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
         Double expectedResult = 2*0.99;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+    }
+    @Test
+    public void testTwoForAmount(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
 
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 4);
 
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, toothbrush, 0.99);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Double expectedResult = (2*0.99);
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+    }
+    @Test
+    public void testFiveForAmount(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 5);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, toothbrush, 1.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Double expectedResult = 1.0;
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+    }
+    @Test
+    public void testTenPercentDiscount(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 4);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Double expectedResult = (4*0.99)-((4*0.99)*0.1);
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
 }
