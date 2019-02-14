@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class SupermarketTest {
 
     @Test
-    public void testSomething() {
+    public void testApplePriceWithToothbrushDiscount() {
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -21,8 +21,26 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        // Todo: complete this test
         Double expectedResult = 1.99 * 2.5;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+    }
+    @Test
+    public void testThreeForTwoOffer(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 3);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 3.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        Double expectedResult = 2*0.99;
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+
+
     }
 }
