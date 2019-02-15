@@ -27,10 +27,7 @@ public class OfferTest {
     
     @Test
     public void testThreeForTwoOffer(){
-        catalog.addProduct(toothbrush, 0.99);
-        cart.addItemQuantity(toothbrush, 3);
-        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 10.0);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+    	Receipt receipt = setCaracteristicsForTestOffer(3, SpecialOfferType.ThreeForTwo, 10.0);
 
         Double expectedResult = 2*0.99;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
@@ -38,21 +35,15 @@ public class OfferTest {
     
     @Test
     public void testThreeForTwoOfferIfQuantityInferiorTo2(){
-        catalog.addProduct(toothbrush, 0.99);
-        cart.addItem(toothbrush);
-        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 10.0);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+    	Receipt receipt = setCaracteristicsForTestOffer(1, SpecialOfferType.ThreeForTwo, 10.0);
 
         Double expectedResult = 0.99;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
-    
+     
     @Test
     public void testTwoForAmountOffer(){
-        catalog.addProduct(toothbrush, 0.99);
-        cart.addItemQuantity(toothbrush, 4);
-        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, toothbrush, 0.99);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+    	Receipt receipt = setCaracteristicsForTestOffer(4, SpecialOfferType.TwoForAmount, 0.99);
 
         Double expectedResult = (2*0.99);
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
@@ -60,10 +51,7 @@ public class OfferTest {
     
     @Test
 	public void testTwoForAmountIfQuantityInferiorTo2 () {
-		catalog.addProduct(toothbrush, 0.99);
-        cart.addItem(toothbrush);
-        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, toothbrush, 0.99);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+    	Receipt receipt = setCaracteristicsForTestOffer(1, SpecialOfferType.TwoForAmount, 0.99);
 
         Double expectedResult = 0.99;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
@@ -71,10 +59,7 @@ public class OfferTest {
     
     @Test
     public void testFiveForAmountOffer(){
-        catalog.addProduct(toothbrush, 0.99);
-        cart.addItemQuantity(toothbrush, 5);
-        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, toothbrush, 1.0);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+    	Receipt receipt = setCaracteristicsForTestOffer(5, SpecialOfferType.FiveForAmount, 1.0);
 
         Double expectedResult = 1.0;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
@@ -82,10 +67,7 @@ public class OfferTest {
     
     @Test
     public void testFiveForAmountOfferIfQuantityInferiorTo5(){
-        catalog.addProduct(toothbrush, 0.99);
-        cart.addItem(toothbrush);
-        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, toothbrush, 1.0);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
+    	Receipt receipt = setCaracteristicsForTestOffer(1, SpecialOfferType.FiveForAmount, 1.0);
 
         Double expectedResult = 0.99;
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
@@ -93,11 +75,8 @@ public class OfferTest {
     
     @Test
     public void testTenPercentDiscountOffer(){
-        catalog.addProduct(toothbrush, 0.99);
-        cart.addItemQuantity(toothbrush, 4);
-        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
-        Receipt receipt = teller.checksOutArticlesFrom(cart);
-
+    	Receipt receipt = setCaracteristicsForTestOffer(4, SpecialOfferType.TenPercentDiscount, 10.0);
+    	
         Double expectedResult = (4*0.99)-((4*0.99)*0.1);
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
@@ -110,5 +89,14 @@ public class OfferTest {
         List<Discount> discounts = receipt.getDiscounts();
 
         Assertions.assertTrue(discounts.isEmpty());
+    }
+    
+    private Receipt setCaracteristicsForTestOffer(double quantity, SpecialOfferType offerType, double argument) {
+    	catalog.addProduct(toothbrush, 0.99);
+        cart.addItemQuantity(toothbrush, quantity);
+        teller.addSpecialOffer(offerType, toothbrush, argument);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        
+        return receipt;
     }
 }
