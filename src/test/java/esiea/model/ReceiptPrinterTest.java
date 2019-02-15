@@ -14,13 +14,13 @@ public class ReceiptPrinterTest {
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
-        Product toothpaste = new Product("toothpaste", ProductUnit.Each);
-        catalog.addProduct(toothpaste, 0.90);
+        Product apple = new Product("apple", ProductUnit.Kilo);
+        catalog.addProduct(apple, 2.10);
 
         ShoppingCart cart = new ShoppingCart();
 
         cart.addItemQuantity(toothbrush, 4);
-        cart.addItemQuantity(toothpaste, 1);
+        cart.addItemQuantity(apple, 1.00);
 
 
         Teller teller = new Teller(catalog);
@@ -30,7 +30,7 @@ public class ReceiptPrinterTest {
         ReceiptPrinter receiptPrinter = new ReceiptPrinter();
 
         String stringToTest = receiptPrinter.printReceipt(receipt);
-        String expectedString = "toothbrush"+"                          "+"3.96"+"\n"+"  "+"0.99"+" * "+"4"+"\n"+"toothpaste"+"                          "+"0.90"+"\n"+"2 for 0.99"+"("+"toothbrush"+")"+"             "+"-"+"1.98"+"\n"+"\n"+"Total: "+"                             "+"2.88";
+        String expectedString = "toothbrush"+"                          "+"3.96"+"\n"+"  "+"0.99"+" * "+"4"+"\n"+"apple"+"                               "+"2.10"+"\n"+"2 for 0.99"+"("+"toothbrush"+")"+"             "+"-"+"1.98"+"\n"+"\n"+"Total: "+"                             "+"4.08";
 
 
         Assertions.assertEquals(expectedString, stringToTest);
