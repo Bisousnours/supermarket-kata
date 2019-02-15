@@ -51,7 +51,7 @@ public class SupermarketTest {
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
-    public void testTwoForAmount(){
+    public void testTwoForAmountOffer(){
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -68,7 +68,7 @@ public class SupermarketTest {
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
-    public void testFiveForAmount(){
+    public void testFiveForAmountOffer(){
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -85,7 +85,7 @@ public class SupermarketTest {
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
-    public void testTenPercentDiscount(){
+    public void testTenPercentDiscountOffer(){
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -101,4 +101,14 @@ public class SupermarketTest {
         Double expectedResult = (4*0.99)-((4*0.99)*0.1);
         Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
+    @Test
+    public void testOfferGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        Offer My_offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+
+        Product expectedResult = toothbrush;
+        Assertions.assertEquals(expectedResult, My_offer.getProduct());
+    }
+
+
 }
