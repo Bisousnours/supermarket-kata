@@ -3,6 +3,9 @@ package esiea.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SupermarketTest {
 
     @Test
@@ -11,8 +14,8 @@ public class SupermarketTest {
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
 
-        double ExpectedPrice = 0.99;
-        Assertions.assertEquals(ExpectedPrice, catalog.getUnitPrice(toothbrush));
+        double expected_price = 0.99;
+        Assertions.assertEquals(expected_price, catalog.getUnitPrice(toothbrush));
     }
     @Test
     public void testApplePriceWithToothbrushDiscount() {
@@ -30,8 +33,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double expectedResult = 1.99 * 2.5;
-        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+        Double Expected_result = 1.99 * 2.5;
+        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
     }
     @Test
     public void testThreeForTwoOffer(){
@@ -47,8 +50,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double expectedResult = 2*0.99;
-        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+        Double Expected_result = 2*0.99;
+        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
     }
     @Test
     public void testTwoForAmountOffer(){
@@ -64,8 +67,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double expectedResult = (2*0.99);
-        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+        Double Expected_result = (2*0.99);
+        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
     }
     @Test
     public void testFiveForAmountOffer(){
@@ -81,8 +84,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double expectedResult = 1.0;
-        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+        Double Expected_result = 1.0;
+        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
     }
     @Test
     public void testTenPercentDiscountOffer(){
@@ -98,17 +101,36 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double expectedResult = (4*0.99)-((4*0.99)*0.1);
-        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
+        Double Expected_result = (4*0.99)-((4*0.99)*0.1);
+        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
     }
     @Test
     public void testOfferGetter(){
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         Offer My_offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
 
-        Product expectedResult = toothbrush;
-        Assertions.assertEquals(expectedResult, My_offer.getProduct());
+        Product Expected_result = toothbrush;
+        Assertions.assertEquals(Expected_result, My_offer.getProduct());
     }
+    @Test
+    public void testReceiptGetItems(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        ShoppingCart cart = new ShoppingCart();
+        Teller teller = new Teller(catalog);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
 
+        List<ReceiptItem> Expected_tab = new ArrayList();
+        Assertions.assertEquals(Expected_tab, receipt.getItems());
+    }
+    @Test
+    public void testReceiptGetDiscounts(){
+        SupermarketCatalog catalog = new FakeCatalog();
+        ShoppingCart cart = new ShoppingCart();
+        Teller teller = new Teller(catalog);
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+        List<Discount> Expected_tab = new ArrayList<>();
+        Assertions.assertEquals(Expected_tab, receipt.getDiscounts());
+    }
 
 }
