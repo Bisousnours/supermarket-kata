@@ -39,8 +39,7 @@ public class ShoppingCartTest {
 	
 	@Test
 	public void testAddItemQuantityIfItemAlreadyInProductQuantities () {
-		cart.addItem(toothbrush);
-		cart.addItem(toothbrush);
+		cart.addItemQuantity(toothbrush, 2);
 		Map<Product, Double> productQuantities = cart.productQuantities();
 		double quantity = productQuantities.get(toothbrush);
 		
