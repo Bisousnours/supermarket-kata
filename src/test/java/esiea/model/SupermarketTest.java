@@ -156,4 +156,36 @@ public class SupermarketTest {
         double expectedDiscountAmount = 3;
         Assertions.assertEquals(expectedDiscountAmount, discount.getDiscountAmount());
     }
+    @Test
+    public void testReceiptItemPriceGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        ReceiptItem item = new ReceiptItem(toothbrush, 2, 3, 6);
+
+        double expectedPrice = 3;
+        Assertions.assertEquals(expectedPrice, item.getPrice());
+    }
+    @Test
+    public void testReceiptItemProductGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        ReceiptItem item = new ReceiptItem(toothbrush, 2, 3, 6);
+
+        Product expectedProduct = toothbrush;
+        Assertions.assertEquals(expectedProduct, item.getProduct());
+    }
+    @Test
+    public void testReceiptItemQuantityGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        ReceiptItem item = new ReceiptItem(toothbrush, 2, 3, 6);
+
+        double expectedQuantity = 2;
+        Assertions.assertEquals(expectedQuantity, item.getQuantity());
+    }
+    @Test
+    public void testReceiptItemTotalPriceyGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        ReceiptItem item = new ReceiptItem(toothbrush, 2, 3, 6);
+
+        double expectedTotalPrice = 6;
+        Assertions.assertEquals(expectedTotalPrice, item.getTotalPrice());
+    }
 }
