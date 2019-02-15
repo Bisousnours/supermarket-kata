@@ -23,7 +23,6 @@ public class ShoppingCart {
         return productQuantities;
     }
 
-
     public void addItemQuantity(Product product, double quantity) {
         items.add(new ProductQuantity(product, quantity));
         if (productQuantities.containsKey(product)) {
