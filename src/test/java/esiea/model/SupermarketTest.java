@@ -14,8 +14,8 @@ public class SupermarketTest {
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
 
-        double expected_price = 0.99;
-        Assertions.assertEquals(expected_price, catalog.getUnitPrice(toothbrush));
+        double expectedPrice = 0.99;
+        Assertions.assertEquals(expectedPrice, catalog.getUnitPrice(toothbrush));
     }
     @Test
     public void testApplePriceWithToothbrushDiscount() {
@@ -33,8 +33,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double Expected_result = 1.99 * 2.5;
-        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
+        Double expectedResult = 1.99 * 2.5;
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
     public void testThreeForTwoOffer(){
@@ -50,8 +50,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double Expected_result = 2*0.99;
-        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
+        Double expectedResult = 2*0.99;
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
     public void testTwoForAmountOffer(){
@@ -67,8 +67,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double Expected_result = (2*0.99);
-        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
+        Double expectedResult = (2*0.99);
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
     public void testFiveForAmountOffer(){
@@ -84,8 +84,8 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double Expected_result = 1.0;
-        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
+        Double expectedResult = 1.0;
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
     public void testTenPercentDiscountOffer(){
@@ -101,16 +101,16 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        Double Expected_result = (4*0.99)-((4*0.99)*0.1);
-        Assertions.assertEquals(Expected_result, receipt.getTotalPrice());
+        Double expectedResult = (4*0.99)-((4*0.99)*0.1);
+        Assertions.assertEquals(expectedResult, receipt.getTotalPrice());
     }
     @Test
     public void testOfferGetter(){
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         Offer My_offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
 
-        Product Expected_result = toothbrush;
-        Assertions.assertEquals(Expected_result, My_offer.getProduct());
+        Product expectedResult = toothbrush;
+        Assertions.assertEquals(expectedResult, My_offer.getProduct());
     }
     @Test
     public void testReceiptGetItems(){
@@ -119,8 +119,8 @@ public class SupermarketTest {
         Teller teller = new Teller(catalog);
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        List<ReceiptItem> Expected_tab = new ArrayList();
-        Assertions.assertEquals(Expected_tab, receipt.getItems());
+        List<ReceiptItem> expectedTab = new ArrayList();
+        Assertions.assertEquals(expectedTab, receipt.getItems());
     }
     @Test
     public void testReceiptGetDiscounts(){
@@ -129,8 +129,31 @@ public class SupermarketTest {
         Teller teller = new Teller(catalog);
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        List<Discount> Expected_tab = new ArrayList<>();
-        Assertions.assertEquals(Expected_tab, receipt.getDiscounts());
+        List<Discount> expectedTab = new ArrayList<>();
+        Assertions.assertEquals(expectedTab, receipt.getDiscounts());
     }
+    @Test
+    public void testDiscountProductGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        Discount discount = new Discount(toothbrush, "my description", 3);
 
+        Product expectedProduct = toothbrush;
+        Assertions.assertEquals(expectedProduct, discount.getProduct());
+    }
+    @Test
+    public void testDiscountDescriptionGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        Discount discount = new Discount(toothbrush, "my description", 3);
+
+        String expectedDescription = "my description";
+        Assertions.assertEquals(expectedDescription, discount.getDescription());
+    }
+    @Test
+    public void testDiscountAmountGetter(){
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        Discount discount = new Discount(toothbrush, "my description", 3);
+
+        double expectedDiscountAmount = 3;
+        Assertions.assertEquals(expectedDiscountAmount, discount.getDiscountAmount());
+    }
 }
