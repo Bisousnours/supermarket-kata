@@ -30,7 +30,7 @@ public class ReceiptPrinterTest {
         ReceiptPrinter receiptPrinter = new ReceiptPrinter();
 
         String stringToTest = receiptPrinter.printReceipt(receipt);
-        String expectedString = "toothbrush"+"                          "+" * "+"\n"+" "+"0.99"+" * "+"4.000"+"\n"+"toothpaste"+"                          "+" * "+"\n"+"("+"toothbrush"+")"+"                "+"-"+"0.99"+"\n";
+        String expectedString = "toothbrush"+"                          "+"3.96"+"\n"+"  "+"0.99"+" * "+"4"+"\n"+"toothpaste"+"                          "+"0.90"+"\n"+"2 for 0.99"+"("+"toothbrush"+")"+"             "+"-"+"1.98"+"\n"+"\n"+"Total: "+"                             "+"2.88";
 
 
         Assertions.assertEquals(expectedString, stringToTest);
