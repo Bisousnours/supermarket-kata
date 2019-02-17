@@ -20,7 +20,7 @@ public class Teller {
             this.offers.put(product, new TenPercentDiscount(offerType, product, argument));
         }else if (offerType == SpecialOfferType.ThreeForTwo){
             this.offers.put(product, new ThreeForTwo(offerType, product, argument));
-        }else if (offerType == SpecialOfferType.FiveForAmount){
+        }else{
             this.offers.put(product, new FiveForAmount(offerType, product, argument));
         }
     }
