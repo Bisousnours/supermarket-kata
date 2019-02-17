@@ -7,15 +7,39 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class GettersTest {
-	
+
 	private SupermarketCatalog catalog = new FakeCatalog();
     private Product toothbrush = new Product("toothbrush", ProductUnit.Each);
     private ShoppingCart cart = new ShoppingCart();
     private Teller teller = new Teller(catalog);
-    
+
     @Test
-    public void testOfferGetter(){
-        Offer offer = new Offer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+    public void testTwoForAmountOfferGetter(){
+        Offer offer = new TwoForAmount(SpecialOfferType.TwoForAmount, toothbrush, 10.0);
+
+        Product expectedResult = toothbrush;
+        Assertions.assertEquals(expectedResult, offer.getProduct());
+    }
+
+    @Test
+    public void testTenPercentDiscountOfferGetter(){
+        Offer offer = new TenPercentDiscount(SpecialOfferType.TenPercentDiscount, toothbrush, 2);
+
+        Product expectedResult = toothbrush;
+        Assertions.assertEquals(expectedResult, offer.getProduct());
+    }
+
+    @Test
+    public void testThreeForTwoOfferGetter(){
+        Offer offer = new TenPercentDiscount(SpecialOfferType.ThreeForTwo, toothbrush, 2);
+
+        Product expectedResult = toothbrush;
+        Assertions.assertEquals(expectedResult, offer.getProduct());
+    }
+
+    @Test
+    public void testFiveForAmountOfferGetter(){
+        Offer offer = new TenPercentDiscount(SpecialOfferType.FiveForAmount, toothbrush, 2);
 
         Product expectedResult = toothbrush;
         Assertions.assertEquals(expectedResult, offer.getProduct());

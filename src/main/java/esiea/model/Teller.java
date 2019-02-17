@@ -14,7 +14,15 @@ public class Teller {
     }
 
     public void addSpecialOffer(SpecialOfferType offerType, Product product, double argument) {
-        this.offers.put(product, new Offer(offerType, product, argument));
+        if (offerType == SpecialOfferType.TwoForAmount) {
+            this.offers.put(product, new TwoForAmount(offerType, product, argument));
+        }else if (offerType == SpecialOfferType.TenPercentDiscount){
+            this.offers.put(product, new TenPercentDiscount(offerType, product, argument));
+        }else if (offerType == SpecialOfferType.ThreeForTwo){
+            this.offers.put(product, new ThreeForTwo(offerType, product, argument));
+        }else if (offerType == SpecialOfferType.FiveForAmount){
+            this.offers.put(product, new FiveForAmount(offerType, product, argument));
+        }
     }
 
     public Receipt checksOutArticlesFrom(ShoppingCart theCart) {
