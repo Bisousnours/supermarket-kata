@@ -7,10 +7,9 @@ public class ThreeForTwo extends Offer {
     }
     @Override
     public Discount amountDiscountCalc(double quantity, double unitPrice) {
-        int x =3;
         Discount discount = null;
         int quantityAsInt = (int) quantity;
-        int numberOfXs = quantityAsInt / x;
+        int numberOfXs = quantityAsInt / 3;
 
         if (quantityAsInt > 2) {
             double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
