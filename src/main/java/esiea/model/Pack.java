@@ -5,14 +5,18 @@ import java.util.Map;
 
 public class Pack {
     Map<Product, Double> packContent = new HashMap<>();
+    String packName;
+
+    public Pack(String packName) {this.packName = packName;}
+    public Map<Product, Double> getPackContent() {
+        return this.packContent;
+    }
+    public String getPackName(){return this.packName;}
 
     public void addPackItem(Product p, Double quantity){
         this.packContent.put(p, quantity);
     }
 
-    public Map<Product, Double> getPackContent() {
-        return packContent;
-    }
     public Discount calcPackOffer(SupermarketCatalog catalog){
         double sumPack = 0.0;
         for (Product p:packContent.keySet()){

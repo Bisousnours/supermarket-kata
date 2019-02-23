@@ -31,7 +31,7 @@ public class ShoppingCart {
             productQuantities.put(product, quantity);
         }
     }
-    void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
+    void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog, List<Pack> packs) {
         for (Product p: productQuantities().keySet()) {
             double quantity = productQuantities.get(p);
             if (offers.containsKey(p)) {
@@ -42,7 +42,11 @@ public class ShoppingCart {
                 if (discount != null)
                     receipt.addDiscount(discount);
             }
-
         }
+        //if (!packs.isEmpty()){
+            //for (Pack i :packs){
+
+            //}
+        //}
     }
 }

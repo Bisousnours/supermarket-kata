@@ -1,5 +1,6 @@
 package esiea.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ public class Teller {
 
     private final SupermarketCatalog catalog;
     private Map<Product, Offer> offers = new HashMap<>();
+    List<Pack> packs = new ArrayList<>();
 
     public Teller(SupermarketCatalog catalog) {
         this.catalog = catalog;
@@ -24,6 +26,9 @@ public class Teller {
             this.offers.put(product, new FiveForAmount(offerType, product, argument));
         }
     }
+     public void addNewPack (Pack pack){
+        this.packs.add(pack);
+     }
 
     public Receipt checksOutArticlesFrom(ShoppingCart theCart) {
         Receipt receipt = new Receipt();
