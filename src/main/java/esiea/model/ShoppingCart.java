@@ -43,10 +43,5 @@ public class ShoppingCart {
                     receipt.addDiscount(discount);
             }
         }
-        //if (!packs.isEmpty()){
-            //for (Pack i :packs){
-
-            //}
-        //}
     }
 }
