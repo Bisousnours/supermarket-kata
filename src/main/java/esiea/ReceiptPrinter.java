@@ -33,14 +33,9 @@ public class ReceiptPrinter {
             String productPresentation = discount.getProduct().getName();
             String pricePresentation = String.format(Locale.UK, "%.2f", discount.getDiscountAmount());
             String description = discount.getDescription();
-            resultDiscount.append(description);
-            resultDiscount.append("(");
-            resultDiscount.append(productPresentation);
-            resultDiscount.append(")");
-            resultDiscount.append(getWhitespace(this.columns - 3 - productPresentation.length() - description.length() - pricePresentation.length()));
-            resultDiscount.append("-");
-            resultDiscount.append(pricePresentation);
-            resultDiscount.append("\n");
+            String Ws = getWhitespace(this.columns - 3 - productPresentation.length() - description.length() - pricePresentation.length());
+            String lineDiscount = description + "(" + productPresentation + ")" + Ws + "-" + pricePresentation + "\n";
+            resultDiscount.append(lineDiscount);
         }
 
     }
