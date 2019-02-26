@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class ShoppingCart {
-
-    private final List<ProductQuantity> items = new ArrayList<>();
+	
+	private final List<ProductQuantity> items = new ArrayList<>();
     Map<Product, Double> productQuantities = new HashMap<>();
-
 
     List<ProductQuantity> getItems() {
         return new ArrayList<>(items);
@@ -31,7 +30,8 @@ public class ShoppingCart {
             productQuantities.put(product, quantity);
         }
     }
-    void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog, List<Pack> packs) {
+	
+    void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
         for (Product p: productQuantities().keySet()) {
             double quantity = productQuantities.get(p);
             if (offers.containsKey(p)) {

@@ -8,8 +8,9 @@ import java.util.Map;
 public class Teller {
 
     private final SupermarketCatalog catalog;
-    private Map<Product, Offer> offers = new HashMap<>();
+    Map<Product, Offer> offers = new HashMap<>();
     List<Pack> packs = new ArrayList<>();
+    private PackedCart packedCart = new PackedCart();
 
     public Teller(SupermarketCatalog catalog) {
         this.catalog = catalog;
@@ -29,10 +30,19 @@ public class Teller {
      public void addNewPack (Pack pack){
         this.packs.add(pack);
      }
+     
+     void updateCatalogAndOffersWithPacksFoundInCart () {
+         Map<Product, Double> packsFoundAndSumPrice = packedCart.getPacksFoundAndSumPrice();
+         for (Product p:packsFoundAndSumPrice.keySet()) {
+         	this.catalog.addProduct(p, packsFoundAndSumPrice.get(p));
+         	addSpecialOffer(SpecialOfferType.TenPercentDiscount, p, 10.0);
+         }
+     }
 
     public Receipt checksOutArticlesFrom(ShoppingCart theCart) {
         Receipt receipt = new Receipt();
-        List<ProductQuantity> productQuantities = theCart.getItems();
+        List<ProductQuantity> productQuantities = packedCart.handlePacks(theCart, packs, catalog);
+        updateCatalogAndOffersWithPacksFoundInCart();
         for (ProductQuantity pq: productQuantities) {
             Product p = pq.getProduct();
             double quantity = pq.getQuantity();
@@ -40,7 +50,7 @@ public class Teller {
             double price = quantity * unitPrice;
             receipt.addProduct(p, quantity, unitPrice, price);
         }
-        theCart.handleOffers(receipt, this.offers, this.catalog, packs);
+        theCart.handleOffers(receipt, this.offers, this.catalog);
 
         return receipt;
     }

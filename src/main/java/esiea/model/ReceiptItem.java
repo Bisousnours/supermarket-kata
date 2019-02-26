@@ -1,7 +1,5 @@
 package esiea.model;
 
-import java.util.Objects;
-
 public class ReceiptItem {
     private final Product product;
     private final double price;
