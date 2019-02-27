@@ -69,11 +69,24 @@ public class PackedCartTest {
 	}
 	
 	@Test
+	public void testHandlePacksIfNoPack() {
+		ShoppingCart cartNoPack = new ShoppingCart();
+		Product orange = new Product("orange", ProductUnit.Kilo);
+		Product lemon = new Product("lemon", ProductUnit.Kilo);
+		cartNoPack.addItem(orange);
+		cartNoPack.addItem(lemon);
+		List<ProductQuantity> productQuantities = packedCart.handlePacks(cartNoPack, teller.packs, catalog);
+		
+		int expectedSize = 2;
+		Assertions.assertEquals(expectedSize, productQuantities.size());
+	}
+	
+	@Test
 	public void testUpdateCatalogAndOffersWithPacksFoundInCart () {
 		teller.packedCart.handlePacks(cart, teller.packs, catalog);
 		teller.updateCatalogAndOffersWithPacksFoundInCart();
+		
         int expectedSize = 2;
-
         Assertions.assertEquals(expectedSize, teller.offers.size());
 	}
 
