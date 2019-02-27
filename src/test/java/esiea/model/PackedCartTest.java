@@ -16,6 +16,9 @@ public class PackedCartTest {
     private Teller teller = new Teller(catalog);
     private Pack pack = new Pack("myPack");
     private ShoppingCart cart = new ShoppingCart();
+    private ShoppingCart cartNoPack = new ShoppingCart();
+    private Product orange = new Product("orange", ProductUnit.Kilo);
+    private Product lemon = new Product("lemon", ProductUnit.Kilo);
     
     public PackedCartTest() {
     	catalog.addProduct(toothbrush, 2.0);
@@ -30,6 +33,9 @@ public class PackedCartTest {
         teller.addNewPack(pack);
 
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+        
+		cartNoPack.addItem(orange);
+		cartNoPack.addItem(lemon);
 	} 
 	
     @Test
@@ -53,6 +59,14 @@ public class PackedCartTest {
 	}
 	
 	@Test
+    public void testFindPackElementsIfNoPack() {
+        packedCart.findPackElements(pack.getPackContent(), cartNoPack.getItems());
+        
+        int expectedElementsFound = 0;
+        Assertions.assertEquals(expectedElementsFound, packedCart.getPackElementFound());
+	}
+	
+	@Test
 	public void testReplacePackElementsByPackAsOneProduct () {
 		List<ProductQuantity> productQuantities = packedCart.replacePackElementsByPackAsOneProduct(pack, cart.getItems(), catalog);
 		
@@ -70,11 +84,6 @@ public class PackedCartTest {
 	
 	@Test
 	public void testHandlePacksIfNoPack() {
-		ShoppingCart cartNoPack = new ShoppingCart();
-		Product orange = new Product("orange", ProductUnit.Kilo);
-		Product lemon = new Product("lemon", ProductUnit.Kilo);
-		cartNoPack.addItem(orange);
-		cartNoPack.addItem(lemon);
 		List<ProductQuantity> productQuantities = packedCart.handlePacks(cartNoPack, teller.packs, catalog);
 		
 		int expectedSize = 2;
