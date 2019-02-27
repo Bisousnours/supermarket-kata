@@ -33,9 +33,6 @@ public class PackedCartTest {
         teller.addNewPack(pack);
 
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
-        
-		cartNoPack.addItem(orange);
-		cartNoPack.addItem(lemon);
 	} 
 	
     @Test
@@ -60,6 +57,8 @@ public class PackedCartTest {
 	
 	@Test
     public void testFindPackElementsIfNoPack() {
+		cartNoPack.addItemQuantity(toothbrush, 2.0);
+		cartNoPack.addItem(lemon);
         packedCart.findPackElements(pack.getPackContent(), cartNoPack.getItems());
         
         int expectedElementsFound = 0;
@@ -84,6 +83,8 @@ public class PackedCartTest {
 	
 	@Test
 	public void testHandlePacksIfNoPack() {
+		cartNoPack.addItem(orange);
+		cartNoPack.addItem(lemon);
 		List<ProductQuantity> productQuantities = packedCart.handlePacks(cartNoPack, teller.packs, catalog);
 		
 		int expectedSize = 2;
