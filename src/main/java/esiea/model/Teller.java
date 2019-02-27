@@ -10,7 +10,7 @@ public class Teller {
     private final SupermarketCatalog catalog;
     Map<Product, Offer> offers = new HashMap<>();
     List<Pack> packs = new ArrayList<>();
-    private PackedCart packedCart = new PackedCart();
+    PackedCart packedCart = new PackedCart();
 
     public Teller(SupermarketCatalog catalog) {
         this.catalog = catalog;

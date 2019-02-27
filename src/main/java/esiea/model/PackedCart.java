@@ -39,6 +39,7 @@ public class PackedCart {
 				if (pq.getProduct()==p && pq.getQuantity()==packContent.get(p)) {
 					this.packElementFound++; 
 				}
+
 			}
 		}
 	}

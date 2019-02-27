@@ -28,6 +28,7 @@ public class PackedCartTest {
         cart.addItem(toothpaste);
         
         teller.addNewPack(pack);
+
         teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
 	} 
 	
@@ -69,10 +70,10 @@ public class PackedCartTest {
 	
 	@Test
 	public void testUpdateCatalogAndOffersWithPacksFoundInCart () {
-		packedCart.handlePacks(cart, teller.packs, catalog);
-        teller.updateCatalogAndOffersWithPacksFoundInCart();
-        
+		teller.packedCart.handlePacks(cart, teller.packs, catalog);
+		teller.updateCatalogAndOffersWithPacksFoundInCart();
         int expectedSize = 2;
+
         Assertions.assertEquals(expectedSize, teller.offers.size());
 	}
 
